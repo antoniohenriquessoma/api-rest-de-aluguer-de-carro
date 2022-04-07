@@ -7,10 +7,10 @@ class CreateCategoryController{
 
     }
 
-    handle(req: Request, res: Response): Response{
+  async handle(req: Request, res: Response): Promise<Response>{
         const { name, description } = req.body;
 
-        this.createCategoryUse.execute({name, description });
+     await  this.createCategoryUse.execute({name, description });
         return res.status(201).send();
     }
 }

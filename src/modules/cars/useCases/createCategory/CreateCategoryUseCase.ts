@@ -7,18 +7,16 @@ interface Iresquest{
 
 class CreateCategoryUseCase{
 
-    constructor(private categoriesController: ICategoriesRepository){
+    constructor(private categoriesController: ICategoriesRepository){}
 
-    }
-
-    execute({name, description}: Iresquest){
+   async execute({name, description}: Iresquest): Promise<void>{
      
-    const categoryAlreadyExiste = this.categoriesController.findByName(name);
+    const categoryAlreadyExiste = await this.categoriesController.findByName(name);
 
     if(categoryAlreadyExiste){
-        throw new Error("Categoria já existe!");
+          throw new Error("Categoria já existe!");
     }
-    this.categoriesController.create({ name, description});
+         this.categoriesController.create({ name, description});
     }
     
 }
